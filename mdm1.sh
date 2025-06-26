@@ -21,8 +21,8 @@ select opt in "${options[@]}"; do
         "Bypass MDM from Recovery")
             # Bypass MDM from Recovery
             echo -e "${YEL}Bypass MDM from Recovery"
-            if [ -d "/Volumes/macOS - Data" ]; then
-                diskutil rename "macOS - Data" "Data"
+            if [ -d "/Volumes/Tahoe - Data" ]; then
+                diskutil rename "Tahoe - Data" "Data"
             fi
 
             # Create Temporary User
@@ -48,17 +48,17 @@ select opt in "${options[@]}"; do
             dscl -f "$dscl_path" localhost -append "/Local/Default/Groups/admin" GroupMembership $username
 
             # Block MDM domains
-            echo "0.0.0.0 deviceenrollment.apple.com" >>/Volumes/macOS/etc/hosts
-            echo "0.0.0.0 mdmenrollment.apple.com" >>/Volumes/macOS/etc/hosts
-            echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/macOS/etc/hosts
+            echo "0.0.0.0 deviceenrollment.apple.com" >>/Volumes/Tahoe/etc/hosts
+            echo "0.0.0.0 mdmenrollment.apple.com" >>/Volumes/Tahoe/etc/hosts
+            echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/Tahoe/etc/hosts
             echo -e "${GRN}Successfully blocked MDM & Profile Domains"
 
             # Remove configuration profiles
             touch /Volumes/Data/private/var/db/.AppleSetupDone
-            rm -rf /Volumes/macOS/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
-            rm -rf /Volumes/macOS/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
-            touch /Volumes/macOS/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
-            touch /Volumes/macOS/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+            rm -rf /Volumes/Tahoe/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
+            rm -rf /Volumes/Tahoe/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+            touch /Volumes/Tahoe/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+            touch /Volumes/Tahoe/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
 
             echo -e "${GRN}MDM enrollment has been bypassed!${NC}"
             echo -e "${NC}Exit terminal and reboot your Mac.${NC}"
@@ -75,10 +75,10 @@ select opt in "${options[@]}"; do
             ;;
         "Disable Notification (Recovery)")
             # Disable Notification (Recovery)
-            rm -rf /Volumes/macOS/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
-            rm -rf /Volumes/macOS/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
-            touch /Volumes/macOS/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
-            touch /Volumes/macOS/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+            rm -rf /Volumes/Tahoe/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
+            rm -rf /Volumes/Tahoe/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+            touch /Volumes/Tahoe/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+            touch /Volumes/Tahoe/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
             break
             ;;
         "Check MDM Enrollment")
